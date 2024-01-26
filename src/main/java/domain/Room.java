@@ -5,7 +5,6 @@ public class Room {
     public Boolean occupied;
     public Guest guest;
 
-
     public Integer getRoomNumber() {
         return roomNumber;
     }

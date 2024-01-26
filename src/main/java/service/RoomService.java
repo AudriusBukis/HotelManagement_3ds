@@ -1,6 +1,6 @@
 package service;
 
-import Utils.SystemService;
+import utils.SystemUtils;
 import domain.Guest;
 import domain.Room;
 import domain.RoomHistory;
@@ -9,11 +9,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
-import static Config.Constants.*;
+import static config.Constants.*;
 
 public class RoomService {
     private final Scanner scanner = new Scanner(System.in);
-    private final SystemService systemService = new SystemService();
+    private final SystemUtils systemUtils = new SystemUtils();
 
     /**
      * Check-in a guest to the hotel room.
@@ -39,7 +39,7 @@ public class RoomService {
         } else {
             System.out.println(NO_ROOMS_MSG);
         }
-        systemService.waitForEnter();
+        systemUtils.waitForEnter();
     }
 
     /**
@@ -54,7 +54,7 @@ public class RoomService {
         // Validate the input
         if (!roomNumberInput.matches("\\d+")) {
             System.out.println(INVALID_INPUT_MSG);
-            systemService.waitForEnter();
+            systemUtils.waitForEnter();
         }else {
             indexNumber  = Integer.parseInt(roomNumberInput) - 1;
             // Check if the room is occupied
@@ -69,15 +69,15 @@ public class RoomService {
                 roomsHistoryList.stream().filter(roomHistory -> roomHistory.getRoomNumber() == indexNumber + 1 && roomHistory.getCheckOutDate() == null).findFirst().ifPresent(roomHistory -> {
                     roomHistory.setCheckOutDate(LocalDateTime.now());
                 });
-                systemService.waitForEnter();
+                systemUtils.waitForEnter();
             }else if (indexNumber >= 0 && indexNumber < hotelRooms.size() && !hotelRooms.get(indexNumber).getOccupied()){
                 // If the room is not occupied, inform user that the room is not occupied
                 System.out.println((indexNumber + 1) + ROOM_IS_NOT_OCCUPIED_MSG);
-                systemService.waitForEnter();
+                systemUtils.waitForEnter();
             } else {
                 // If the room number is bigger than the number of rooms, print an error message
                 System.out.println(INVALID_INPUT_MSG);
-                systemService.waitForEnter();
+                systemUtils.waitForEnter();
             }
         }
     }

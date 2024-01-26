@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static Config.Constants.*;
+import static config.Constants.*;
 
 public class HotelManagementService {
 
@@ -32,7 +32,7 @@ public class HotelManagementService {
         // run application
         while (true) {
             // display main menu
-            System.out.println(mainMenu);
+            System.out.println(MAIN_MENU);
             // Get user choice
             String choice = scanner.nextLine().trim();
             // Handle user choice

@@ -1,16 +1,16 @@
 package service;
 
-import Utils.SystemService;
+import utils.SystemUtils;
 import domain.Room;
 import domain.RoomHistory;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static Config.Constants.*;
+import static config.Constants.*;
 
 public class RoomInfoService {
-    private final SystemService systemService = new SystemService();
+    private final SystemUtils systemUtils = new SystemUtils();
     /**
      * This method prints the room occupancy review. Only Rooms that are occupied will be printed.
      */
@@ -19,7 +19,7 @@ public class RoomInfoService {
         hotelRooms.stream().filter(Room::getOccupied).forEach(room -> {
             System.out.println(ROOM_MSG + room.getRoomNumber() + ": " + room.getGuest());
         });
-        systemService.waitForEnter();
+        systemUtils.waitForEnter();
     }
 
     /**
@@ -47,7 +47,7 @@ public class RoomInfoService {
                     filter(roomHistory -> roomHistory.getRoomNumber().equals(roomNumber)).
                     forEach(roomHistory -> System.out.println(printHistoryLog(roomHistory)));
         }
-        systemService.waitForEnter();
+        systemUtils.waitForEnter();
     }
 
     /**
@@ -63,13 +63,13 @@ public class RoomInfoService {
                     roomHistory.getGuest(),
                     roomHistory.getCheckInDate().format(formatter),
                     roomHistory.getCheckOutDate().format(formatter)
-            );
+                    );
         } else {
             return  String.format(HISTORY_LOG_MSG,
                     roomHistory.getGuest(),
                     roomHistory.getCheckInDate().format(formatter),
                     "not checked out"
-            );
+                    );
         }
     }
 }

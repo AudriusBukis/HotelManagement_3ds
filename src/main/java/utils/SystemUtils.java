@@ -1,10 +1,10 @@
-package Utils;
+package utils;
 
 import java.util.Scanner;
 
-import static Config.Constants.PRESS_ENTER_TO_CONTINUE_MSG;
+import static config.Constants.PRESS_ENTER_TO_CONTINUE_MSG;
 
-public class SystemService {
+public class SystemUtils {
 
     /**
      * Method to pause the program to see the output. To continue program user must press enter.
